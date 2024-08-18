@@ -1,7 +1,7 @@
 {
   "name": "devtilities",
   "version": "1.0.0",
-  "description": "A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography and file management",
+  "description": "A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
