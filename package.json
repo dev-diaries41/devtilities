@@ -8,6 +8,10 @@
     "build": "tsc -p .",
     "prepublishOnly": "npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dev-diaries41/devtilities.git"
+  },
   "keywords": [
     "utilities",
     "retry",
@@ -16,6 +20,10 @@
     "cryptography",
     "counter"
   ],
+  "bugs": {
+    "url": "https://github.com/dev-diaries41/devtilities/issues"
+  },
+  "homepage": "https://github.com/dev-diaries41/devtilities#readme",
   "author": "d41dev",
   "license": "MIT",
   "devDependencies": {
