@@ -1,0 +1,29 @@
+{
+  "name": "devtilities",
+  "version": "1.0.0",
+  "description": "A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography and file management",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p .",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "utilities",
+    "retry",
+    "polling",
+    "timer",
+    "cryptography",
+    "counter"
+  ],
+  "author": "d41dev",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.28",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.2"
+  }
+}
