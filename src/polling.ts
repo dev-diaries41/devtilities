@@ -1,6 +1,6 @@
-import { Counter } from "./counter";
+import { Counter } from "devtilities";
 
-interface PollOptions  {
+interface PollOptions {
   interval: number;
   maxDuration: number;
   maxErrors: number;
@@ -11,17 +11,17 @@ interface PollOptions  {
 const DefaultPollOptions: PollOptions = {
   interval: 10 * 1000,
   maxDuration: 2 * 60 * 1000,
-  maxErrors: 3
-}
+  maxErrors: 3,
+};
 
 export class Polling {
-  private callback: () => void;
+  private callback: () => void | Promise<void>;
   private intervalId: NodeJS.Timeout | null = null;
   private startTime: number;
   private options: PollOptions;
   private errorCounter: Counter;
 
-  constructor(callback: () => void, options: Partial<PollOptions>) {
+  constructor(callback: () => void | Promise<void>, options: Partial<PollOptions>) {
     this.callback = callback;
     this.options = { ...DefaultPollOptions, ...options };
     this.startTime = 0;
@@ -42,14 +42,17 @@ export class Polling {
     }
   }
 
-  private pollCycle(): void {
-    this.executeCallback();
+  private async pollCycle(): Promise<void> {
+    await this.executeCallback(); // Call async method
     this.checkDuration();
   }
 
-  private executeCallback(): void {
+  private async executeCallback(): Promise<void> {
     try {
-      this.callback();
+      const result = this.callback();
+      if (result instanceof Promise) {
+        await result;
+      }
     } catch (error: any) {
       this.handleError();
     }
@@ -57,7 +60,9 @@ export class Polling {
 
   private handleError(): void {
     this.errorCounter.increment();
+    console.log(`Error count: ${this.errorCounter.count}`);
     if (this.errorCounter.isMax()) {
+      console.log("Max errors reached, stopping polling.");
       this.options.onMaxErrors?.();
       this.stop();
     }

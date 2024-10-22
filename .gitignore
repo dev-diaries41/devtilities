@@ -1,7 +1,0 @@
-dist
-.env
-node_modules/
-package-lock.json
-src/file.ts
-src/api.ts
-index.ts

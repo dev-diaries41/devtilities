@@ -1,6 +1,6 @@
 {
   "name": "devtilities",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,8 +31,5 @@
     "@types/node": "^20.11.28",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
-  },
-  "dependencies": {
-    "axios": "^1.7.2"
   }
 }
