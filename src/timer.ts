@@ -19,14 +19,10 @@ export class Timer {
     this.end = undefined
   }
 
-  async timeoutFunction<T>(callback: () => Promise<T>, timeout: number): Promise<T | null> {
-      const timeoutPromise = new Promise<T | null>((_, reject) =>
-          setTimeout(() => reject(new Error('Operation timed out')), timeout)
-      );
-      try {
-          return await Promise.race([callback(), timeoutPromise]);
-      } catch (error: any) {
-          throw error;
-      }
-  }
+  async timeoutFunction<T>(callback: () => Promise<T>, timeout: number): Promise<T> {
+    const timeoutPromise = new Promise<T>((_, reject) =>
+        setTimeout(() => reject(new Error('Operation timed out')), timeout)
+    );
+    return await Promise.race([callback(), timeoutPromise]);
+    } 
 }

@@ -11,7 +11,7 @@ export declare class Polling {
     private startTime;
     private options;
     private errorCounter;
-    constructor(callback: () => void, options: Partial<PollOptions>);
+    constructor(callback: () => void | Promise<void>, options: Partial<PollOptions>);
     start(): void;
     stop(): void;
     private pollCycle;

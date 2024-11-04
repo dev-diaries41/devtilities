@@ -5,7 +5,7 @@ const counter_1 = require("./counter");
 const DefaultPollOptions = {
     interval: 10 * 1000,
     maxDuration: 2 * 60 * 1000,
-    maxErrors: 3
+    maxErrors: 3,
 };
 class Polling {
     callback;
@@ -31,13 +31,16 @@ class Polling {
             this.intervalId = null;
         }
     }
-    pollCycle() {
-        this.executeCallback();
+    async pollCycle() {
+        await this.executeCallback(); // Call async method
         this.checkDuration();
     }
-    executeCallback() {
+    async executeCallback() {
         try {
-            this.callback();
+            const result = this.callback();
+            if (result instanceof Promise) {
+                await result;
+            }
         }
         catch (error) {
             this.handleError();
@@ -45,7 +48,9 @@ class Polling {
     }
     handleError() {
         this.errorCounter.increment();
+        console.log(`Error count: ${this.errorCounter.count}`);
         if (this.errorCounter.isMax()) {
+            console.log("Max errors reached, stopping polling.");
             this.options.onMaxErrors?.();
             this.stop();
         }

@@ -1,4 +1,4 @@
-import { Counter } from "devtilities";
+import { Counter } from "./counter";
 
 interface PollOptions {
   interval: number;
