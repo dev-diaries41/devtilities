@@ -60,9 +60,9 @@ export class Polling {
 
   private handleError(): void {
     this.errorCounter.increment();
-    console.log(`Error count: ${this.errorCounter.count}`);
+    console.error(`Error count: ${this.errorCounter.count}`);
     if (this.errorCounter.isMax()) {
-      console.log("Max errors reached, stopping polling.");
+      console.error("Max errors reached, stopping polling.");
       this.options.onMaxErrors?.();
       this.stop();
     }
