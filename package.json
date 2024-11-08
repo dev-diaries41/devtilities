@@ -1,7 +1,7 @@
 {
   "name": "devtilities",
-  "version": "1.0.4",
-  "description": "A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography",
+  "version": "1.1.0",
+  "description": "A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography and data manipulation functions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -19,7 +19,8 @@
     "polling",
     "timer",
     "cryptography",
-    "counter"
+    "counter",
+    "data"
   ],
   "bugs": {
     "url": "https://github.com/dev-diaries41/devtilities/issues"
