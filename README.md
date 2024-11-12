@@ -1,6 +1,6 @@
 # Devtilities
 
-A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography.
+A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography and data handling
 
 ## Modules
 
@@ -8,4 +8,5 @@ A collection of universal utility functions including retry mechanism, polling, 
 - Polling
 - Retry
 - Timer
-- Cryptography
+- Cryptography 
+- data: stats, transformations, formatting, metrics
