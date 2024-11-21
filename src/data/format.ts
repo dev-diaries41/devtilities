@@ -1,5 +1,5 @@
-export function dataToMarkdownTable<T extends Record<string, string | number | Date | null | undefined>[] | Record<string, string | number | Date | null | undefined>>(
-    data: T,
+export function dataToMarkdownTable<T extends Record<keyof T, string | number | Date | null | undefined>>(
+    data: T[] | T,
     rowLabels?: string[]
 ): string {
     if (Array.isArray(data)) {
@@ -7,8 +7,8 @@ export function dataToMarkdownTable<T extends Record<string, string | number | D
             return '';
         }
 
-        const keys = Object.keys(data[0]);
-        const headerRow = '|' + keys.map(key => ` ${key} `).join('|') + '|\n';
+        const keys = Object.keys(data[0]) as (keyof T)[];
+        const headerRow = '|' + keys.map(key => ` ${String(key)} `).join('|') + '|\n';
         const separatorRow = '|' + keys.map(() => ' --- ').join('|') + '|\n';
         const dataRows = data.map(item => constructMarkdownTableRow(item)).join('');
         return headerRow + separatorRow + dataRows;
@@ -19,9 +19,13 @@ export function dataToMarkdownTable<T extends Record<string, string | number | D
 
         const headers = rowLabels && rowLabels.length === 2 ? rowLabels : ['Category', 'Count'];
         const headerRow = `| ${headers[0]} | ${headers[1]} |\n|----------|-------|\n`;
-        const dataRows = Object.entries(data)
-            .map(([category, count]) => constructMarkdownTableRow({ category, count }))
-            .join('');
+        const dataRows = Object.entries(data).map(([category, count]) =>
+          constructMarkdownTableRow({
+            category,
+            count: count as string | number | Date | null | undefined,
+          })
+        )
+        .join('');
         return headerRow + dataRows;
     }
 }

@@ -1,6 +1,6 @@
 {
   "name": "devtilities",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A collection of universal utility functions including retry mechanism, polling, timer, counter, cryptography and data manipulation functions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
