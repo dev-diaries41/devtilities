@@ -8,7 +8,8 @@ export function dataToMarkdownTable<T extends Record<keyof T, string | number | 
         }
 
         const keys = Object.keys(data[0]) as (keyof T)[];
-        const headerRow = '|' + keys.map(key => ` ${String(key)} `).join('|') + '|\n';
+        const titles = (rowLabels && rowLabels.length === keys.length)? rowLabels : keys;
+        const headerRow = '|' + titles.map(key => ` ${String(key)} `).join('|') + '|\n';
         const separatorRow = '|' + keys.map(() => ' --- ').join('|') + '|\n';
         const dataRows = data.map(item => constructMarkdownTableRow(item)).join('');
         return headerRow + separatorRow + dataRows;
