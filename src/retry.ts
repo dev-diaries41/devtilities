@@ -1,29 +1,24 @@
+// Design for single-use usecases
 export class RetryHandler {
-  private maxRetries: number;
-  private currentRetry: number;
+  private readonly maxRetries: number;
 
   constructor(maxRetries: number = 3) {
     this.maxRetries = maxRetries;
-    this.currentRetry = 0;
   }
 
   async retry<T>(func: () => Promise<T>, errorHandler: (error: unknown) => Promise<boolean>): Promise<T> {
-    try {
-      return await func();
-    } catch (error) {
-      this.currentRetry++;
-      if (this.currentRetry > this.maxRetries) throw error;
+    let currentRetry = 0;
 
-      const shouldRetry = await errorHandler(error);
-      if (!shouldRetry) throw error;
+    while (true) {
+      try {
+        return await func();
+      } catch (error) {
+        currentRetry++;
+        if (currentRetry > this.maxRetries) throw error;
 
-      return this.retry(func, errorHandler);
-    } finally {
-      this.reset();
+        const shouldRetry = await errorHandler(error);
+        if (!shouldRetry) throw error;
+      }
     }
-  }
-
-  reset() {
-    this.currentRetry = 0;
   }
 }

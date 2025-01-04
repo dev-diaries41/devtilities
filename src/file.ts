@@ -78,15 +78,6 @@ export function deleteFile(filename: string) {
 }
 
 
-
-export function checkPathExist(pathToCheck: string) {
-    const directoryPath = path.join(__dirname, pathToCheck);
-    if (!fs.existsSync(directoryPath)) {
-        fs.mkdirSync(directoryPath);
-    }
-    return directoryPath;
-}
-
 export function saveBase64Image(base64String: string, fileName: string) {
     try {
         const base64Data = base64String.replace(/^data:image\/\w+;base64,/, '');
@@ -99,12 +90,7 @@ export function saveBase64Image(base64String: string, fileName: string) {
 }
 
 export function getImageAsBase64(filePath: string) {
-    try {
-        const imageFile = fs.readFileSync(filePath);
-        const base64Image = `data:image/${filePath.split('.').pop()};base64,${imageFile.toString('base64')}`;
-        return base64Image;
-    } catch (error) {
-        console.error('Error reading file or converting to base64:', error);
-        throw error;
-    }
+    const imageFile = fs.readFileSync(filePath);
+    const base64Image = `data:image/${filePath.split('.').pop()};base64,${imageFile.toString('base64')}`;
+    return base64Image;
 }

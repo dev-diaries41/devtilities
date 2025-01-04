@@ -1,6 +1,5 @@
 export * from './counter'
 export * from './cryptography'
-// export * from './api'
 // export * from './file'
 export * from './polling'
 export * from './timer'
